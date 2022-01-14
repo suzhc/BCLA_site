@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BCLA-site</title>
+</head>
+<body>
+    <h3>BCLA-site</h3>
+    <hr>
+    <a href="{% url 'all_node' %}">
+        <p>Show the all</p>
+    </a>
+    {% for name in node_list %}
+        <a href="{% url 'node_page' name %}">
+            <p>{{ name }}</p>
+        </a>
+    {% endfor %}
+</body>
+</html>
