@@ -3,10 +3,10 @@ from scripts import script
 
 
 # Create your views here.
-def base_page(request):
+def home_page(request):
     context = {}
     context['node_list'] = script.node_list()
-    return render_to_response('base.html', context)
+    return render_to_response('home_page.html', context)
 
 def all_node(request):
     df = script.read_the_csv()

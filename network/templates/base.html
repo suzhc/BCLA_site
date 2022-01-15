@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BCLA-site</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <h3>BCLA-site</h3>
-    <hr>
-    <a href="{% url 'all_node' %}">
-        <p>Show the all</p>
-    </a>
-    {% for name in node_list %}
-        <a href="{% url 'node_page' name %}">
-            <p>{{ name }}</p>
+    <div>
+        <a href="{% url 'home_page' %}">
+            <h3>BCLA-site</h3>
         </a>
-    {% endfor %}
+    </div>
+    <hr>
+    {% block content %}{% endblock %}
 </body>
 </html>

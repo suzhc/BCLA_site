@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{# 页面标题 #}
+{% block title %}
+    BCLA_homepage
+{% endblock %}
+
+{# 页面内容 #}
+{% block content %}
+    <a href="{% url 'all_node' %}">
+        <p>Show the all</p>
+    </a>
+    {% for name in node_list %}
+        <a href="{% url 'node_page' name %}">
+            <p>{{ name }}</p>
+        </a>
+    {% endfor %}
+{% endblock %}
+
+
+
