@@ -1,0 +1,1 @@
+web: gunicorn BCLA_site.wsgi --log-file -

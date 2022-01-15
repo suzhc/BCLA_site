@@ -14,9 +14,9 @@ class NodeDescription(models.Model):
 
 
 class Network(models.Model):
-    Source = models.ForeignKey(NodeDescription, on_delete=models.DO_NOTHING)
-    Target = models.CharField(NodeDescription, on_delete=models.DO_NOTHING)
+    Source = models.ForeignKey(NodeDescription, related_name='source', on_delete=models.DO_NOTHING)
+    Target = models.ForeignKey(NodeDescription, related_name='Target', on_delete=models.DO_NOTHING)
     Weight = models.IntegerField()
 
     def __str__(self):
-        return self.Source + "->" + self.Target
+        return self.Source.node_name + "->" + self.Target.node_name
