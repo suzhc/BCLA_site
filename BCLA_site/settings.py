@@ -25,7 +25,10 @@ SECRET_KEY = '(j)%#q_fz#22g3=rzvx!uehr9sm$#wan$^$^+8=qma-sncti@0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bcla-site-test.herokuapp.com']
+ALLOWED_HOSTS = [
+    'bcla-site-test.herokuapp.com',
+    '127.0.0.1',
+]
 
 
 # Application definition

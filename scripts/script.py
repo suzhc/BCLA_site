@@ -2,6 +2,8 @@ import networkx
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from network.models import Network, NodeDescription
+
 from bokeh.io import output_notebook, show, save
 from bokeh.models import Range1d, Circle, ColumnDataSource, MultiLine, EdgesAndLinkedNodes, NodesAndLinkedEdges
 from bokeh.plotting import figure
@@ -12,7 +14,7 @@ from networkx.algorithms import community
 
 
 def read_the_csv():
-    G_df = pd.read_csv('got-edges.csv')
+    G_df = pd.DataFrame(list(Network.objects.all().values()))
     return G_df
 
 
@@ -106,9 +108,9 @@ def draw_the_network(G):
 
 
 def node_list():
-    node = pd.read_csv('got-nodes.csv')
+    node = pd.DataFrame(list(NodeDescription.objects.all().values()))
 
-    node = node['Id']
+    node = node['node_name']
     return node
 
 
