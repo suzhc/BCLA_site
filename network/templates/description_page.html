@@ -9,8 +9,9 @@
         <p>Result for {{ searched }}</p>
         <p>
             {% for node in node_descriptions %}
+                <br>
                 <p>{{ node }}</p>
-                <a href="{% url 'node_page' node.node_name %}">
+                <a href="{% url 'return_node_page' node.node_name %}">
                     <p>ego graph</p>
                 </a>
             {% endfor %}

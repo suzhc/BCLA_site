@@ -35,8 +35,5 @@ def return_node_description(request):
         return render_to_response('description_page.html', {'searched': searched,
                                                             'node_descriptions': node_descriptions})
     else:
-        searched = request.GET()
-        node_descriptions = NetworkNode.objects.filter(node_name__contains=searched).values()
-        return render_to_response('description_page.html', {'searched': searched,
-                                                            'node_descriptions': node_descriptions})
+        return render_to_response('description_page.html')
 
