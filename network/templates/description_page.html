@@ -10,6 +10,9 @@
         <p>
             {% for node in node_descriptions %}
                 <p>{{ node }}</p>
+                <a href="{% url 'node_page' node.node_name %}">
+                    <p>ego graph</p>
+                </a>
             {% endfor %}
         </p>
     {% else %}

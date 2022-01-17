@@ -35,8 +35,5 @@ def return_node_description(request):
         return render_to_response('description_page.html', {'searched': searched,
                                                             'node_descriptions': node_descriptions})
     else:
-        searched = request.POST['searched']
-        node_descriptions = script.return_node_description(searched)
-        return render_to_response('description_page.html', {'searched': searched,
-                                                            'node_description': node_descriptions})
+        return render_to_response('description_page.html', )
 

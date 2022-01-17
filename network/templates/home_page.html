@@ -19,7 +19,7 @@
         <p>Show the all</p>
     </a>
     {% for name in node_list %}
-        <a href="{% url 'node_page' name %}">
+        <a href="{% url 'node_description' %}">
             <p>{{ name }}</p>
         </a>
     {% endfor %}
