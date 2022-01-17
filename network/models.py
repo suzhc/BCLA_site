@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class NodeDescription(models.Model):
+class NetworkNode(models.Model):
     node_name = models.CharField(max_length=15)
     node_description = models.TextField()
 
@@ -13,7 +13,7 @@ class NodeDescription(models.Model):
         return self.node_name
 
 
-class Network(models.Model):
+class NetworkEdge(models.Model):
     Source = models.TextField()
     Target = models.TextField()
     Weight = models.IntegerField()

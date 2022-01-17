@@ -2,7 +2,7 @@ import networkx
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from network.models import Network, NodeDescription
+from network.models import NetworkEdge, NetworkNode
 
 from bokeh.io import output_notebook, show, save
 from bokeh.models import Range1d, Circle, ColumnDataSource, MultiLine, EdgesAndLinkedNodes, NodesAndLinkedEdges
@@ -13,10 +13,14 @@ from bokeh.transform import linear_cmap
 from networkx.algorithms import community
 
 
-def read_the_csv():
-    G_df = pd.DataFrame(list(Network.objects.all().values()))
+def read_edge_data():
+    G_df = pd.DataFrame(list(NetworkEdge.objects.all().values()))
     return G_df
 
+
+def read_node_data():
+    G_des = pd.DataFrame(list(NetworkNode.objects.all().values()))
+    return G_des
 
 def convert_to_G(G_df):
     G = networkx.from_pandas_edgelist(G_df, 'Source', 'Target', 'Weight')
@@ -108,13 +112,16 @@ def draw_the_network(G):
 
 
 def node_list():
-    node = pd.DataFrame(list(NodeDescription.objects.all().values()))
-
+    node = read_node_data()
     node = node['node_name']
     return node
 
 
 def ego_graph(G, node_name):
-    df = read_the_csv()
+    df = read_edge_data()
     G = convert_to_G(df)
     return networkx.ego_graph(G, node_name)
+
+
+def return_node_description(node_name):
+    return NetworkNode.objects.filter(node_name__contains=node_name)

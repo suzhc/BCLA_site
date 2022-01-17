@@ -1,4 +1,4 @@
-from network.models import Network, NodeDescription
+from network.models import NetworkEdge, NetworkNode
 import pandas as pd
 
 def read_csv():
@@ -8,7 +8,7 @@ def read_csv():
 
 def to_sql(df):
     for row in df:
-        _, created = Network.objects.get_or_create(
+        _, created = NetworkEdge.objects.get_or_create(
             Source=row[0],
             Target=row[1],
             Weight=row[2],

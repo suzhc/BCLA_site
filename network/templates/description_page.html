@@ -1,1 +1,18 @@
+{% extends 'base.html' %}
 
+{% block title %}
+    Gene Description
+{% endblock %}
+
+{% block content %}
+    {% if searched %}
+        <p>Result for {{ searched }}</p>
+        <p>
+            {% for node in node_descriptions %}
+                <p>{{ node }}</p>
+            {% endfor %}
+        </p>
+    {% else %}
+        <p>Please type in...</p>
+    {% endif %}
+{% endblock %}
