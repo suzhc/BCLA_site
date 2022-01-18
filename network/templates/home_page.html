@@ -7,13 +7,17 @@
 
 {# 页面内容 #}
 {% block content %}
-    <form method=POST action="{% url 'node_description' %}">
+    <div class="search">
+        <form method=POST action="{% url 'node_description' %}">
         <label>
             {% csrf_token %}
-            <input type="search" name="searched">
+            <input type="search" placeholder="Input Gene Name..." name="searched">
         </label>
         <button type="submit">Search</button>
     </form>
+
+    </div>
+
 
     <a href="{% url 'all_node' %}">
         <p>Show the all</p>
