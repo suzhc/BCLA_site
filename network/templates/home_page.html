@@ -2,7 +2,7 @@
 
 {# 页面标题 #}
 {% block title %}
-    BCLA_homepage
+    Cancer Keeping Gene
 {% endblock %}
 
 {# 页面内容 #}
@@ -18,11 +18,6 @@
     <a href="{% url 'all_node' %}">
         <p>Show the all</p>
     </a>
-    {% for name in node_list %}
-        <a href="{% url 'return_node_page' name%}">
-            <p>{{ name }}</p>
-        </a>
-    {% endfor %}
 {% endblock %}
 
 

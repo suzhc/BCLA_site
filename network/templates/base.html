@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
 </head>
+{% if messages %}
+    <script>
+        {% for msg in messages %}
+            alert('{{ msg.message }}');
+        {% endfor %}
+    </script>
+{% endif %}
 <body>
-    <div>
-        <a href="{% url 'home_page' %}">
-            <h3>BCLA-site</h3>
-        </a>
-    </div>
-    <hr>
-    {% block content %}{% endblock %}
+<div>
+    <a href="{% url 'home_page' %}">
+        <h3>BCLA-site</h3>
+    </a>
+</div>
+<hr>
+{% block content %}{% endblock %}
 </body>
 </html>
