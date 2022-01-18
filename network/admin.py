@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NetworkNode, NetworkEdge
+from .models import *
 # Register your models here.
 
 
@@ -11,3 +11,13 @@ class NodeDescriptionAdmin(admin.ModelAdmin):
 @admin.register(NetworkEdge)
 class Network(admin.ModelAdmin):
     list_display = ('Source', 'Target', 'Weight')
+
+
+@admin.register(BNetworkEdge)
+class BNetworkEdge(admin.ModelAdmin):
+    list_display = ('source', 'target')
+
+
+@admin.register(BNetworkNode)
+class BNetworkNode(admin.ModelAdmin):
+    list_display = ('name', 'degree')
