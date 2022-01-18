@@ -1,8 +1,6 @@
 from django.shortcuts import render_to_response, render
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
-import tkinter.messagebox
-from tkinter import *
 
 from django.contrib import messages
 
