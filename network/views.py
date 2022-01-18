@@ -8,7 +8,7 @@ from django.contrib import messages
 
 from .models import *
 
-from scripts import script
+from scripts import script as util
 
 
 # Create your views here.
@@ -18,18 +18,18 @@ def home_page(request):
 
 # 返回
 def return_all_node(request):
-    df = script.read_edge_data()
-    G = script.convert_to_G(df)
-    script.draw_the_network(G)
+    df = util.read_edge_data()
+    G = util.convert_to_G(df)
+    util.draw_the_network(G)
     return render_to_response('network.html')
 
 
 # 此函数是用来返回节点自我中心网的可视化页面，后续须做到description页面里去
 def return_node_page(request, node_name):
-    df = script.read_edge_data()
-    G = script.convert_to_G(df)
-    G = script.ego_graph(G, node_name)
-    script.draw_the_network(G)
+    df = util.read_edge_data()
+    G = util.convert_to_G(df)
+    G = util.ego_graph(G, node_name)
+    util.draw_the_network(G)
     return render_to_response('network.html')
 
 @csrf_exempt
@@ -43,8 +43,14 @@ def return_node_description(request):
             messages.error(request, 'There is no '+searched)
             return render(request, 'home_page.html')
         else:
+            df = util.read_edge_data()
+            G = util.convert_to_G(df)
+            G = util.ego_graph(G, searched)
+            script, div = util.draw_the_network(G)
             return render_to_response('description_page.html', {'searched': searched,
-                                                                'node_descriptions': node_descriptions})
+                                                                'node_descriptions': node_descriptions,
+                                                                'script': script,
+                                                                'div': div})
     else:
         return render_to_response('description_page.html')
 

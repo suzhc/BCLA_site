@@ -4,23 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-</head>
-{% if messages %}
-    <script>
-        {% for msg in messages %}
-            alert('{{ msg.message }}');
-        {% endfor %}
-    </script>
-{% endif %}
-<body>
-
-<div class="nav">
-    <a class="logo" href="{% url 'home_page' %}">
-        <h3>Cancer Keeping Gene</h3>
-    </a>
-</div>
-<hr>
-{% block content %}{% endblock %}
+    {% block bokeh_css %}{% endblock %}
 
 <style type="text/css">
     * {
@@ -56,7 +40,7 @@
         float: left;
     / / 左浮动 flex: 4;
         height: 50px;
-        width: 250px;
+        width: 350px;
         outline: none;
         border: 1px solid #444444;
         box-sizing: border-box;
@@ -69,6 +53,7 @@
         float: right;
         flex: 1;
         height: 50px;
+        width: 70px;
         background-color: #444;
         color: white;
         border: 1px solid #444;
@@ -90,5 +75,31 @@
         cursor: pointer;
     }
 </style>
+
+
+
+
+</head>
+{% if messages %}
+    <script>
+        {% for msg in messages %}
+            alert('{{ msg.message }}');
+        {% endfor %}
+    </script>
+{% endif %}
+<body>
+
+<div class="nav">
+    <a class="logo" href="{% url 'home_page' %}">
+        <h3>Cancer Keeping Gene</h3>
+    </a>
+</div>
+<hr>
+{% block content %}{% endblock %}
+
+
 </body>
+
+{% block bokeh_js %}{% endblock %}
+
 </html>

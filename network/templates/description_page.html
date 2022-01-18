@@ -4,19 +4,29 @@
     Gene Description
 {% endblock %}
 
+{% block bokeh_css %}
+
+    <link href=”http://cdn.pydata.org/bokeh/release/bokeh-2.3.3.min.css" rel=”stylesheet” type=”text/css”>
+    <link href=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.3.3.min.css" rel=”stylesheet” type=”text/css”>
+{% endblock %}
 {% block content %}
     {% if searched %}
         <p>Result for {{ searched }}</p>
         <p>
-            {% for node in node_descriptions %}
-                <br>
-                <p>{{ node }}</p>
-                <a href="{% url 'return_node_page' node.node_name %}">
-                    <p>ego graph</p>
-                </a>
-            {% endfor %}
+            <br>
+            <p>{{ node_descriptions }}</p>
+
         </p>
     {% else %}
         <p>Please type in...</p>
     {% endif %}
+    {{ div| safe }}
+{% endblock %}
+
+{% block bokeh_js %}
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.3.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.3.3.min.js"></script>
+    {{ script| safe }}
 {% endblock %}

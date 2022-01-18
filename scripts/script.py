@@ -10,6 +10,7 @@ from bokeh.plotting import figure
 from bokeh.plotting import from_networkx
 from bokeh.palettes import Blues8, Reds8, Purples8, Oranges8, Viridis8, Spectral8
 from bokeh.transform import linear_cmap
+from bokeh.embed import components
 from networkx.algorithms import community
 
 
@@ -108,7 +109,9 @@ def draw_the_network(G):
 
     plot.renderers.append(network_graph)
 
+    script, div = components(plot)
     save(plot, filename=f"./network/templates/network.html")
+    return script, div
 
 
 def node_list():
