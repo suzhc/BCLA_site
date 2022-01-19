@@ -72,7 +72,7 @@ def draw_the_network(G):
     color_palette = Blues8
 
     # Choose a title!
-    title = 'Game of Thrones Network'
+    title = 'Gene Network'
 
     # Establish which categories will appear when hovering over each node
     HOVER_TOOLTIPS = [
@@ -123,8 +123,8 @@ def node_list():
 
 
 def ego_graph(G, node_name):
-    df = network_dao.read_edge_data()
-    G = convert_to_G(df)
+    # df = network_dao.read_edge_data()
+    # G = convert_to_G(df)
     return networkx.ego_graph(G, node_name)
 
 

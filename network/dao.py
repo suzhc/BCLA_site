@@ -25,6 +25,17 @@ def read_node_data():
     return G_des
 
 
+def read_gene_node():
+    gene_node = pd.read_csv('node.csv')
+    return gene_node
+
+
+def read_gene_edge():
+    gene_edge = pd.read_csv('edge.csv')
+    gene_edge = gene_edge.drop([0])
+    gene_edge = gene_edge.drop(['Database'], axis=1)
+    return gene_edge
+
 # new function #
 
 # get node info by node name
