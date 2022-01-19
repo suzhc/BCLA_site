@@ -7,17 +7,25 @@
 
 {# 页面内容 #}
 {% block content %}
-    <div class="search">
-        <form method=POST action="{% url 'node_description' %}">
-            <label>
-                {% csrf_token %}
-                <input type="search" placeholder="Input Gene Name..." name="searched">
-            </label>
-            <button type="submit">Search</button>
-        </form>
-        {% if message %}
-            {{ message }}
-        {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <form class="input-group" method="post" action="{% url 'node_description' %}">
+                            {% csrf_token %}
+                            <input type="text" class="form-control input-lg" placeholder="Input Gene Name"
+                                   name="searched" />
+                            <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="submit" style="background-color: #000 !important;border-color: #000">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 

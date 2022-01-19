@@ -1,9 +1,11 @@
+import json
+
 from django.shortcuts import render_to_response, render, redirect, reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-
-
 from django.contrib import messages
+
+import pandas as pd
 
 from .models import *
 
@@ -40,6 +42,10 @@ def return_node_description(request):
 
         # 这里后改为自己写的函数，用来获取基因信息
         node_descriptions = NetworkNode.objects.filter(node_name=searched).values()
+        df = pd.read_csv('node.csv')
+        json_records = df.reset_index().to_json(orient='records')
+        arr = json.loads(json_records)
+        context = {'d': arr}
         if not len(node_descriptions):
             return redirect('home_page')
         else:
@@ -50,7 +56,8 @@ def return_node_description(request):
             return render_to_response('description_page.html', {'searched': searched,
                                                                 'node_descriptions': node_descriptions,
                                                                 'script': script,
-                                                                'div': div})
+                                                                'div': div,
+                                                                'd': context})
     else:
         return render_to_response('description_page.html')
 
