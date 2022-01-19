@@ -1,9 +1,12 @@
 import json
+import os
+import mimetypes
 
 from django.shortcuts import render_to_response, render, redirect, reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib import messages
+from django.http.response import HttpResponse
 
 import pandas as pd
 
@@ -43,6 +46,7 @@ def return_node_description(request):
         # 这里后改为自己写的函数，用来获取基因信息
         node_descriptions = NetworkNode.objects.filter(node_name=searched).values()
         df = pd.read_csv('node.csv')
+        df.to_csv('new.csv')
         json_records = df.reset_index().to_json(orient='records')
         arr = json.loads(json_records)
         context = {'d': arr}
@@ -60,4 +64,14 @@ def return_node_description(request):
                                                                 'd': context})
     else:
         return render_to_response('description_page.html')
+
+
+def download_file(request):
+    filename = 'new.csv'
+    filepath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = open(filepath, 'r')
+    mime_type, _ = mimetypes.guess_type(filepath)
+    response = HttpResponse(path, content_type=mime_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
 

@@ -23,4 +23,5 @@ urlpatterns = [
     path('all/', network_views.return_all_node, name='all_node'),
     path('node/', include('network.urls')),
     path('description/', network_views.return_node_description, name='node_description'),
+    path('download/', network_views.download_file, name='download_file')
 ]
