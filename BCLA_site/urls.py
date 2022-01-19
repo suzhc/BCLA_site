@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from network.views import home_page, return_node_page, return_all_node, return_node_description
+import network.views as network_views
 
 urlpatterns = [
-    path('', home_page, name='home_page'),
+    path('', network_views.home_page, name='home_page'),
     path('admin/', admin.site.urls),
-    path('all/', return_all_node, name='all_node'),
+    path('all/', network_views.return_all_node, name='all_node'),
     path('node/', include('network.urls')),
-    path('description/', return_node_description, name='node_description'),
+    path('description/', network_views.return_node_description, name='node_description'),
 ]

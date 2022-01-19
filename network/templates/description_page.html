@@ -5,22 +5,52 @@
 {% endblock %}
 
 {% block bokeh_css %}
-
     <link href=”http://cdn.pydata.org/bokeh/release/bokeh-2.3.3.min.css" rel=”stylesheet” type=”text/css”>
     <link href=”http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.3.3.min.css" rel=”stylesheet” type=”text/css”>
 {% endblock %}
-{% block content %}
-    {% if searched %}
-        <p>Result for {{ searched }}</p>
-        <p>
-            <br>
-            <p>{{ node_descriptions }}</p>
 
-        </p>
-    {% else %}
-        <p>Please type in...</p>
-    {% endif %}
-    {{ div| safe }}
+{% block description_css %}
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+
+{% block content %}
+    <div class="w3-row w3-padding-64">
+
+        <div class="w3-twothird w3-container">
+            <div class="ego_graph">
+                {{ div| safe }}
+            </div>
+            <h1 class="w3-text-teal" style="color: #444444 !important">Description</h1>
+            <p>
+                {% if searched %}
+                    <p>
+                        <br>
+                    <div>
+                        {% for node_description in node_descriptions %}
+                            <p>这是一个字典，后续列出来</p>
+                            {% for node in node_description %}
+                                <p>{{ node }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    </p>
+                {% else %}
+                    <p>Please type in...</p>
+                {% endif %}
+            </p>
+
+        </div>
+
+        <div class="w3-third w3-container">
+            <h1 class="w3-text-teal" style="color: #444444 !important;">Network Analysis</h1>
+        </div>
+
+    </div>
+
 {% endblock %}
 
 {% block bokeh_js %}
@@ -29,4 +59,6 @@
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.3.3.min.js"></script>
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.3.3.min.js"></script>
     {{ script| safe }}
+    <script src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
+
 {% endblock %}

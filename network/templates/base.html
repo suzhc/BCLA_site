@@ -5,88 +5,93 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     {% block bokeh_css %}{% endblock %}
+    {% block description_css %}{% endblock %}
 
-<style type="text/css">
-    * {
-        margin: 0;
-        padding: 0;
-    }
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-    div.nav {
-        background-color: #eee;
-        border-bottom: 1px solid #ccc;
-        padding: 10px;
-    }
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
 
-    div.nav a {
-        text-decoration: none;
-        color: #000;
-        padding: 5px 10px;
-    }
+        div.nav {
+            background-color: #eee;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
 
-    div.nav a.logo {
-        display: inline-block;
-        font-size: 120%;
-    }
+        div.nav a {
+            text-decoration: none;
+            color: #000;
+            padding: 5px 10px;
+        }
 
-    .search {
-        width: 30%;
-        margin: 100px auto;
-        display: flex;
-        /*border: 1px solid red;*/
-    }
+        div.nav a.logo {
+            display: inline-block;
+            font-size: 120%;
+        }
 
-    .search input {
-        float: left;
-    / / 左浮动 flex: 4;
-        height: 50px;
-        width: 350px;
-        outline: none;
-        border: 1px solid #444444;
-        box-sizing: border-box;
-        border-radius: 10px 0 0 10px;
-        padding: 0 5px;
-    / / 盒子模型，怪异IE盒子模型，width = content + border * 2 + padding * 2 padding-left: 10 px;
-    }
+        .search {
+            width: 30%;
+            margin: 100px auto;
+            display: flex;
+            /*border: 1px solid red;*/
+        }
 
-    .search button {
-        float: right;
-        flex: 1;
-        height: 50px;
-        width: 70px;
-        background-color: #444;
-        color: white;
-        border: 1px solid #444;
-        border-left: none;
-        outline: none;
-        transition: all .3s;
-        padding: 0 10px;
-        font-style: oblique;
-        border-radius: 0 10px 10px 0;
-    }
+        .search input {
+            float: left;
+            height: 50px;
+            width: 350px;
+            outline: none;
+            border: 1px solid #444444;
+            box-sizing: border-box;
+            border-radius: 10px 0 0 10px;
+            padding: 0 5px;
+        }
 
-    .search button i {
-        font-style: normal;
-    }
+        .search button {
+            float: right;
+            flex: 1;
+            height: 50px;
+            width: 70px;
+            background-color: #444;
+            color: white;
+            border: 1px solid #444;
+            border-left: none;
+            outline: none;
+            transition: all .3s;
+            padding: 0 10px;
+            font-style: oblique;
+            border-radius: 0 10px 10px 0;
+        }
 
-    .search button:hover {
-        color:#444;
-        background-color: #fff;
-        cursor: pointer;
-    }
-</style>
+        .search button i {
+            font-style: normal;
+        }
 
-
+        .search button:hover {
+            color: #444;
+            background-color: #fff;
+            cursor: pointer;
+        }
+    </style>
 
 
 </head>
-{% if messages %}
-    <script>
-        {% for msg in messages %}
-            alert('{{ msg.message }}');
-        {% endfor %}
-    </script>
-{% endif %}
+{#{% if messages %}#}
+{#    <script>#}
+{#        {% for msg in messages %}#}
+{#            alert('{{ msg.message }}');#}
+{#        {% endfor %}#}
+{#    </script>#}
+{#{% endif %}#}
 <body>
 
 <div class="nav">
