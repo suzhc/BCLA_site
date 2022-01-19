@@ -21,69 +21,67 @@
     <div class="w3-row w3-padding-64">
 
         <div class="w3-twothird w3-container">
-            <div class="jumbotron text-center">
+            <div class="container">
                 {{ div| safe }}
             </div>
             <h1 class="w3-text-teal" style="color: #444444 !important">Description</h1>
-            <p>
-                {% if searched %}
-                    <p>
-                        <br>
-                    <div>
-                        {% for node_description in node_descriptions %}
-                            <p>这里列出上面自我中心网的全部基因列表</p>
-                        {% endfor %}
+            {% if searched %}
+                    <br>
+                <div>
+                    {% for node_description in node_descriptions %}
+                        <p>这里列出上面自我中心网的全部基因列表</p>
+                    {% endfor %}
                     <a href="{% url 'download_file' %}">Download</a>
-                    </div>
-                    </p>
-                    <div class="container" style="overflow-x:auto; height: 1000px!important;">
-                        <table class="table table-striped">
-                            <thread>
+                </div>
+                </p>
+                <div class="container" style="overflow-x:auto;">
+                    <table class="table table-striped">
+                        <thread>
+                            <tr>
+                                <th>Gene</th>
+                                <th>Indegree</th>
+                                <th>Outdegree</th>
+                                <th>Degree</th>
+                                <th>Node Type</th>
+                                <th>Node Class(PPI)</th>
+                                <th>Essential gene</th>
+                                <th>Mouse</th>
+                                <th>Fish</th>
+                                <th>Fly</th>
+                                <th>Worm</th>
+                                <th>Yeast</th>
+                                <th>Signaling proteins</th>
+                                <th>Membrane Receptors</th>
+                                <th>Kinases</th>
+                                <th>Transcription Factors</th>
+                                <th>High Copy Number</th>
+                                <th>Moderate Copy Number</th>
+                                <th>Low Copy Number</th>
+                                <th>Very Low Copy Number</th>
+                                <th>Acetylation</th>
+                                <th>Phosphorylation (pS/pT)</th>
+                                <th>Phosphorylation (pY)</th>
+                                <th>Ubiquitination</th>
+                                <th>Cancer driver genes</th>
+                                <th>Cancer I</th>
+                                <th>OMIM</th>
+                                <th>HIV (RNAi)</th>
+                                <th>HIV (PPI)</th>
+                                <th>All Viruses</th>
+                                <th>Therapeutic</th>
+                                <th>FDA approved</th>
+                                <th>Druggable</th>
+                                <th>GO Genes</th>
+                                <th>STOP Genes</th>
+                                <th>coreCTL_genes</th>
+                                <th>CAR_genes</th>
+                                <th>checkpoint_genes</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                        {% if d %}
+                            {% for i in d %}
                                 <tr>
-                                    <th>Gene</th>
-                                    <th>Indegree</th>
-                                    <th>Outdegree</th>
-                                    <th>Degree</th>
-                                    <th>Node Type</th>
-                                    <th>Node Class(PPI)</th>
-                                    <th>Essential gene</th>
-                                    <th>Mouse</th>
-                                    <th>Fish</th>
-                                    <th>Fly</th>
-                                    <th>Worm</th>
-                                    <th>Yeast</th>
-                                    <th>Signaling proteins</th>
-                                    <th>Membrane Receptors</th>
-                                    <th>Kinases</th>
-                                    <th>Transcription Factors</th>
-                                    <th>High Copy Number</th>
-                                    <th>Moderate Copy Number</th>
-                                    <th>Low Copy Number</th>
-                                    <th>Very Low Copy Number</th>
-                                    <th>Acetylation</th>
-                                    <th>Phosphorylation (pS/pT)</th>
-                                    <th>Phosphorylation (pY)</th>
-                                    <th>Ubiquitination</th>
-                                    <th>Cancer driver genes</th>
-                                    <th>Cancer I</th>
-                                    <th>OMIM</th>
-                                    <th>HIV (RNAi)</th>
-                                    <th>HIV (PPI)</th>
-                                    <th>All Viruses</th>
-                                    <th>Therapeutic</th>
-                                    <th>FDA approved</th>
-                                    <th>Druggable</th>
-                                    <th>GO Genes</th>
-                                    <th>STOP Genes</th>
-                                    <th>coreCTL_genes</th>
-                                    <th>CAR_genes</th>
-                                    <th>checkpoint_genes</th>
-                                </tr>
-                            </thread>
-                            <tbody>
-                            {% if d %}
-                                {% for i in d %}
-                                    <tr>
                                     <td>{{ i.Gene }}</td>
                                     <td>{{ i.Indegree }}</td>
                                     <td>{{ i.Outdegree }}</td>
@@ -122,17 +120,15 @@
                                     <td>{{ i }}</td>
                                     <td>{{ i }}</td>
                                     <td>{{ i }}</td>
-                                    </tr>
-                                {% endfor %}
-                            {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% else %}
-                    <p>Please type in...</p>
-                {% endif %}
-            </p>
-
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>Please type in...</p>
+            {% endif %}
         </div>
 
         <div class="w3-third w3-container">

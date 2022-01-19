@@ -12,7 +12,8 @@ import pandas as pd
 
 from .models import *
 
-from scripts import script as util
+import network.dao as network_dao
+import network.tools as network_tools
 
 
 # Create your views here.
@@ -22,19 +23,19 @@ def home_page(request):
 
 # 返回
 def return_all_node(request):
-    df = util.read_edge_data()
-    G = util.convert_to_G(df)
-    util.draw_the_network(G)
+    df = network_dao.read_edge_data()
+    G = network_tools.convert_to_G(df)
+    network_tools.draw_the_network(G)
     return render_to_response('network.html')
 
 
 # 此函数是用来返回节点自我中心网的可视化页面，后续须做到description页面里去
 def return_node_page(request, node_name):
 
-    df = util.read_edge_data()
-    G = util.convert_to_G(df)
-    G = util.ego_graph(G, node_name)
-    util.draw_the_network(G)
+    df = network_dao.read_edge_data()
+    G = network_tools.convert_to_G(df)
+    G = network_tools.ego_graph(G, node_name)
+    network_tools.draw_the_network(G)
     return render_to_response('network.html')
 
 
@@ -53,10 +54,10 @@ def return_node_description(request):
         if not len(node_descriptions):
             return redirect('home_page')
         else:
-            df = util.read_edge_data()
-            G = util.convert_to_G(df)
-            G = util.ego_graph(G, searched)
-            script, div = util.draw_the_network(G)
+            df = network_dao.read_edge_data()
+            G = network_tools.convert_to_G(df)
+            G = network_tools.ego_graph(G, searched)
+            script, div = network_tools.draw_the_network(G)
             return render_to_response('description_page.html', {'searched': searched,
                                                                 'node_descriptions': node_descriptions,
                                                                 'script': script,

@@ -1,4 +1,14 @@
+
+# -*- coding: utf-8 -*-
+# @Time    : 2022/1/19 21:30
+# @Author  : pcy
+# @Site    : 
+# @File    : tools.py
+# @Software: PyCharm 
+# @Comment : 
+
 import networkx
+import network.dao as network_dao
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -12,16 +22,8 @@ from bokeh.palettes import Blues8, Reds8, Purples8, Oranges8, Viridis8, Spectral
 from bokeh.transform import linear_cmap
 from bokeh.embed import components
 from networkx.algorithms import community
+from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
 
-
-def read_edge_data():
-    G_df = pd.DataFrame(list(NetworkEdge.objects.all().values()))
-    return G_df
-
-
-def read_node_data():
-    G_des = pd.DataFrame(list(NetworkNode.objects.all().values()))
-    return G_des
 
 
 def convert_to_G(G_df):
@@ -57,7 +59,6 @@ def draw_the_network(G):
     networkx.set_node_attributes(G, modularity_class, 'modularity_class')
     networkx.set_node_attributes(G, modularity_color, 'modularity_color')
 
-    from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
 
     # Choose colors for node and edge highlighting
     node_highlight_color = 'white'
@@ -116,16 +117,56 @@ def draw_the_network(G):
 
 
 def node_list():
-    node = read_node_data()
+    node = network_dao.read_node_data()
     node = node['node_name']
     return node
 
 
 def ego_graph(G, node_name):
-    df = read_edge_data()
+    df = network_dao.read_edge_data()
     G = convert_to_G(df)
     return networkx.ego_graph(G, node_name)
 
 
 def return_node_description(node_name):
     return NetworkNode.objects.filter(node_name__contains=node_name)
+
+# Count some information in the node list,such as cancer driver
+def neighbor_info_count(node_name):
+    node_info = network_dao.get_node_by_name(node_name)
+    node_neighbor = network_dao.get_neighbor_by_node_id(node_info.id)
+
+    neighbor_count = {
+        "average_degree",
+        "essential_gene",
+        "evolutionary_mouse",
+        "evolutionary_fish",
+        "evolutionary_fly",
+        "evolutionary_worm",
+        "evolutionary_yeast",
+        "cell_signaling_signaling_protein",
+        "cell_signaling_membrane_receptors",
+        "cell_signaling_kinases",
+        "cell_signaling_transcription_factors",
+        "protein_abundance_high_copy_number",
+        "protein_abundance_moderate_copy_number",
+        "protein_adundance_low_copy_number",
+        "protein_adundance_very_low_copy_number",
+        "post_translational_modification_acetylation",
+        "post_translational_modification_phosphorylation_ps_pt",
+        "post_transaltional_modification_phosphorylation_py",
+        "post_translational_modification_ubiquitination",
+        "disease_genes_cancer_driver",
+        "disease_genes_cancer1",
+        "disease_genes_omim",
+        "drug_target_therapeutic_targets",
+        "drug_target_fda_approved",
+        "drug_target_druggable",
+        "regulators_of_cell_proliferation_go_genes",
+        "regulatior_of_cell_proliferation_stop_genes",
+        "immune_genes_core_ctl_genes",
+        "immune_genes_car_genes",
+        "immune_genes_checkpoint_genes"
+    }
+
+    return None
