@@ -16,109 +16,146 @@
                 {{ div| safe }}
             </div>
             <h1>Description</h1>
-            {% if searched %}
-                    <br>
-                <div>
-                <p>{{ node_descriptions }}</p>
-                </div>
-                </p>
-                <div class="container">
-                    <table class="table">
-                        <thread>
-                            <tr>
-                                <th>Gene</th>
-                                <th>Indegree</th>
-                                <th>Outdegree</th>
-                                <th>Degree</th>
-                                <th>Node Type</th>
-                                <th>Node Class(PPI)</th>
-                                <th>Essential gene</th>
-                                <th>Mouse</th>
-                                <th>Fish</th>
-                                <th>Fly</th>
-                                <th>Worm</th>
-                                <th>Yeast</th>
-                                <th>Signaling proteins</th>
-                                <th>Membrane Receptors</th>
-                                <th>Kinases</th>
-                                <th>Transcription Factors</th>
-                                <th>High Copy Number</th>
-                                <th>Moderate Copy Number</th>
-                                <th>Low Copy Number</th>
-                                <th>Very Low Copy Number</th>
-                                <th>Acetylation</th>
-                                <th>Phosphorylation (pS/pT)</th>
-                                <th>Phosphorylation (pY)</th>
-                                <th>Ubiquitination</th>
-                                <th>Cancer driver genes</th>
-                                <th>Cancer I</th>
-                                <th>OMIM</th>
-                                <th>HIV (RNAi)</th>
-                                <th>HIV (PPI)</th>
-                                <th>All Viruses</th>
-                                <th>Therapeutic</th>
-                                <th>FDA approved</th>
-                                <th>Druggable</th>
-                                <th>GO Genes</th>
-                                <th>STOP Genes</th>
-                                <th>coreCTL_genes</th>
-                                <th>CAR_genes</th>
-                                <th>checkpoint_genes</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                        {% if d %}
-                            {% for i in d %}
-                                <tr>
-                                    <td>{{ i.Gene }}</td>
-                                    <td>{{ i.Indegree }}</td>
-                                    <td>{{ i.Outdegree }}</td>
-                                    <td>{{ i.NodeType }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                    <td>{{ i }}</td>
-                                </tr>
+            <br>
+            <div>
+                <table class="table">
+                    <tr>
+                        {% for col in node_descriptions.columns %}
+                            <td>
+                                {{ col }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in node_descriptions.iterrows %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>
+                                    {{ cell }}
+                                </td>
                             {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
-                </div>
-            {% else %}
-                <p>Please type in...</p>
-            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            </p>
+{#            <div class="container">#}
+{#                <table class="table">#}
+{#                    <thread>#}
+{#                        <tr>#}
+{#                            <th>Gene</th>#}
+{#                            <th>Indegree</th>#}
+{#                            <th>Outdegree</th>#}
+{#                            <th>Degree</th>#}
+{#                            <th>Node Type</th>#}
+{#                            <th>Node Class(PPI)</th>#}
+{#                            <th>Essential gene</th>#}
+{#                            <th>Mouse</th>#}
+{#                            <th>Fish</th>#}
+{#                            <th>Fly</th>#}
+{#                            <th>Worm</th>#}
+{#                            <th>Yeast</th>#}
+{#                            <th>Signaling proteins</th>#}
+{#                            <th>Membrane Receptors</th>#}
+{#                            <th>Kinases</th>#}
+{#                            <th>Transcription Factors</th>#}
+{#                            <th>High Copy Number</th>#}
+{#                            <th>Moderate Copy Number</th>#}
+{#                            <th>Low Copy Number</th>#}
+{#                            <th>Very Low Copy Number</th>#}
+{#                            <th>Acetylation</th>#}
+{#                            <th>Phosphorylation (pS/pT)</th>#}
+{#                            <th>Phosphorylation (pY)</th>#}
+{#                            <th>Ubiquitination</th>#}
+{#                            <th>Cancer driver genes</th>#}
+{#                            <th>Cancer I</th>#}
+{#                            <th>OMIM</th>#}
+{#                            <th>HIV (RNAi)</th>#}
+{#                            <th>HIV (PPI)</th>#}
+{#                            <th>All Viruses</th>#}
+{#                            <th>Therapeutic</th>#}
+{#                            <th>FDA approved</th>#}
+{#                            <th>Druggable</th>#}
+{#                            <th>GO Genes</th>#}
+{#                            <th>STOP Genes</th>#}
+{#                            <th>coreCTL_genes</th>#}
+{#                            <th>CAR_genes</th>#}
+{#                            <th>checkpoint_genes</th>#}
+{#                        </tr>#}
+{#                    </thread>#}
+{#                    <tbody>#}
+{#                    {% if d %}#}
+{#                        {% for i in d %}#}
+{#                            <tr>#}
+{#                                <td>{{ i.Gene }}</td>#}
+{#                                <td>{{ i.Indegree }}</td>#}
+{#                                <td>{{ i.Outdegree }}</td>#}
+{#                                <td>{{ i.NodeType }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                                <td>{{ i }}</td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                    {% endif %}#}
+{#                    </tbody>#}
+{#                </table>#}
+{#            </div>#}
         </div>
 
+
+        <div>
+            <h1>Neighbor Node</h1>
+            <div>
+                <table class="table">
+                    <tr>
+                        {% for col in neighbor_nodes.columns %}
+                            <td>
+                                {{ col }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in neighbor_nodes.iterrows %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>
+                                    {{ cell }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
         <div>
             <h1>Network Analysis</h1>
         </div>

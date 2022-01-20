@@ -47,16 +47,19 @@ def return_node_description(request):
         df_edge = network_dao.read_gene_edge()
         df_node = network_dao.read_gene_node()
         node_descriptions = df_node[df_node.Gene == searched]
-        node_descriptions = list(node_descriptions)
+        # node_descriptions = list(node_descriptions)
         json_records = df_node.reset_index().to_json(orient='records')
         arr = json.loads(json_records)
         context = {'d': arr}
+        neighbor_nodes = network_dao.get_neighbor_node(searched, df_edge)
+        neighbor_nodes = df_node.query("Gene == @neighbor_nodes")
         G = network_tools.convert_to_G(df_edge)
         try:
             G = network_tools.ego_graph(G, searched)
             script, div = network_tools.draw_the_network(G)
             return render_to_response('description_page.html', {'searched': searched,
                                                                 'node_descriptions': node_descriptions,
+                                                                'neighbor_nodes': neighbor_nodes,
                                                                 'script': script,
                                                                 'div': div,
                                                                 'd': context})

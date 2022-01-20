@@ -30,7 +30,7 @@ class BNetworkEdge(models.Model):
     database = models.CharField(max_length=30)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'b_network_edge'
 
 
@@ -64,6 +64,9 @@ class BNetworkNode(models.Model):
     is_disease_genes_cancer_driver = models.IntegerField()
     is_disease_genes_cancer1 = models.IntegerField()
     is_disease_genes_omim = models.IntegerField()
+    is_virus_targets_hiv_rnai = models.IntegerField()
+    is_virus_targets_hiv_ppi = models.IntegerField()
+    is_virus_targets_all_viruses = models.IntegerField()
     is_drug_target_therapeutic_targets = models.IntegerField()
     is_drug_target_fda_approved = models.IntegerField()
     is_drug_target_druggable = models.IntegerField()
@@ -75,6 +78,6 @@ class BNetworkNode(models.Model):
     description = models.CharField(max_length=1000)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'b_network_node'
 

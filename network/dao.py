@@ -53,7 +53,18 @@ def get_neighbor_by_node_id(node_id):
     neighbor.append(source_neighbor)
     return neighbor
 
-# neighbor
+
+
+
+
+
+# demo function #
+def get_neighbor_node(node_name, edge_df):
+    node_list = list(edge_df.loc[edge_df['Source'] == node_name]['Target'])
+    node_list = node_list + list(edge_df.loc[edge_df['Target'] == node_name]['Source'])
+
+    return  node_list
+
 
 
 
