@@ -17,8 +17,47 @@ import network.tools as network_tools
 
 
 # Create your views here.
+@csrf_exempt
 def home_page(request):
-    return render_to_response('home_page.html')
+    # 搜索后
+    if request.method == 'POST':
+        context = {}
+        searched = request.POST['searched']
+        # # 这里后改为自己写的函数，用来获取基因信息
+        # df_edge = network_dao.read_gene_edge()
+        # df_node = network_dao.read_gene_node()
+        # node_descriptions = df_node[df_node.Gene == searched]
+        # # node_descriptions = list(node_descriptions)
+        # json_records = df_node.reset_index().to_json(orient='records')
+        # arr = json.loads(json_records)
+        # table = {'d': arr}
+        # neighbor_nodes = network_dao.get_neighbor_node(searched, df_edge)
+        # neighbor_nodes = df_node.query("Gene == @neighbor_nodes")
+        # G = network_tools.convert_to_G(df_edge)
+        # G = network_tools.ego_graph(G, searched)
+        # script, div = network_tools.draw_the_network(G)
+        # context["searched"] = searched
+        # context["script"] = script
+        # context["div"] = div
+
+        # 首先获取被搜索基因的信息
+        gene_info = network_dao.get_node_by_name(searched)
+        # 获取被搜索基因邻居节点的信息
+        neigbor_info = network_dao.get_neighbor_by_node_id(gene_info.id)
+        # 获取自我中心网
+        G = network_tools.convert_to_G(network_dao.get_all_edge())
+        G = network_tools.ego_graph(G, gene_info.id)
+        script, div = network_tools.draw_the_network(G)
+        ego_graph = {'script': script, 'div': div}
+
+        context["gene_info"] = gene_info
+        context["neigbor_info"] = neigbor_info
+        context["ego_graph"] = ego_graph
+
+        return render_to_response('main.html', context)
+    # 未搜索
+    else:
+        return render_to_response('main.html')
 
 
 # 返回

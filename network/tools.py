@@ -26,8 +26,9 @@ from bokeh.models import EdgesAndLinkedNodes, NodesAndLinkedEdges
 
 
 
-def convert_to_G(G_df):
-    G = networkx.from_pandas_edgelist(G_df, 'Source', 'Target', 'Weight')
+def convert_to_G(edge_info):
+    df = pd.DataFrame(edge_info.values())
+    G = networkx.from_pandas_edgelist(df, 'source', 'target')
     return G
 
 
