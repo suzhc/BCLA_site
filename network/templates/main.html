@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-10">
                 <h1>
-                    Cancer Keeping Gene
+                    <a href="{% url 'home_page' %}">Cancer Keeping Gene</a>
                 </h1>
                 <p>
                     这里可以加一些注释 <a>这里是一个超链接</a>.
@@ -50,46 +50,95 @@
         </form>
     </div>
 
-    <!--如果未搜索，隐藏下面的内容-->
-    <div class="col-md-10 col-md-push-1" id="hide">
-        <!--这里是搜索框下方导航栏部分-->
-        <div>
-            <ul class="breadcrumb">
-                <li><a href="#">详情</a></li>
-                <li><a href="#">邻居节点</a></li>
-                <li><a href="#">自我中心网</a></li>
-            </ul>
+    {% if searched %}
+        <!-- 这里放搜索错误信息 -->
+        <div class="col-md-4 col-md-push-1">
+            <p>There is no Gene named "{{ searched }}"</p>
         </div>
+    {% endif %}
 
-        <!-- 这里放自我中心网图 -->
-        <div class="col-md-7 bg-info">
-            <h2>这里是自我中心网图</h2>
-            {{ ego_graph.div| safe }}
-        </div>
-
-        <!--这里放基因的详情信息-->
-        <div id="gene-description">
-            <div class="col-md-4 col-md-push-1 bg-info">
-                <h3>Description of {{ gene_info.name }}</h3>
-                <p>This is description</p>
-                <p>This is description</p>
-                <p>This is description</p>
-                <p>This is description</p>
-                <p>This is description</p>
-                <h3>Degree</h3>
-                <h3>idControlHub</h3>
+    {% if gene_info %}
+        <!--如果未搜索，隐藏下面的内容-->
+        <div class="col-md-10 col-md-push-1" id="hide">
+            <!--这里是搜索框下方导航栏部分-->
+            <div class="navigationbar">
+                <ul class="breadcrumb">
+                    <li class="navdes">Description</li>
+                    <li class="navnei">Neighbor Info</li>
+                </ul>
             </div>
 
 
+            <div class="description">
+                <!-- 这里放自我中心网图 -->
+                <div class="col-md-7">
+                    {{ ego_graph.div| safe }}
+                </div>
+
+                <!--这里放基因的详情信息-->
+                <div id="gene-description">
+                    <div class="col-md-4 col-md-push-1">
+                        <h3>Description of {{ gene_info.name }}</h3>
+                        <h3>Degree :{{ gene_info.degree }}</h3>
+                        <h3>Node Type :{{ gene_info.control_type }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="neighbor">
+                <!--这里放邻居节点的列表-->
+                <div class="col-md-12" style="overflow-x: scroll;" id="neighbor-node">
+                    <table class="table">
+                        <tr>
+                            {% for col in neigbor_info.columns %}
+                                <td>
+                                    {{ col }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        {% for index, row in neigbor_info.iterrows %}
+                            <tr>
+                                {% for cell in row %}
+                                    <td>
+                                        {{ cell }}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+
+            <!--这里放自我中心网统计信息-->
+            <div id="ego-graph"></div>
         </div>
+    {% endif %}
 
-        <!--这里放邻居节点的列表-->
-        <div id="neighbor-node"></div>
-
-        <!--这里放自我中心网可视化及其统计信息-->
-        <div id="ego-graph"></div>
-    </div>
 </div>
+
+
+</body>
+
+<script>
+    var navdes = document.querySelector('.navdes');
+    var navnei = document.querySelector('.navnei');
+    var description = document.querySelector('.description');
+    var neighbor = document.querySelector('.neighbor');
+
+    {#description.style.display = 'none';#}
+    neighbor.style.display = 'none';
+    navdes.onclick = function () {
+        description.style.display = 'inline';
+        neighbor.style.display = 'none';
+    }
+    navnei.onclick = function () {
+        description.style.display = 'none';
+        neighbor.style.display = 'inline';
+    }
+
+
+</script>
 
 
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
@@ -100,8 +149,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
-</body>
-
 <!--这里加载bokeh所需要的库-->
 <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.3.min.js"></script>
 <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.3.3.min.js"></script>

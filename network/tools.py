@@ -33,9 +33,18 @@ def convert_to_G(edge_info):
 
 
 def draw_the_network(G):
+
+    id_name_dict = {}
+
+    for a in list(G):
+        id_name_dict[a] = network_dao.get_node_by_id(a).name
+
     # 计算度
     degrees = dict(networkx.degree(G))
     networkx.set_node_attributes(G, name='degree', values=degrees)
+
+    # 将名字复制给各节点
+    networkx.set_node_attributes(G, name='name', values=id_name_dict)
 
     # 调整
     number_to_adjust_by = 5
@@ -77,7 +86,7 @@ def draw_the_network(G):
 
     # Establish which categories will appear when hovering over each node
     HOVER_TOOLTIPS = [
-        ("Character", "@index"),
+        ("Gene", "@name"),
         ("Degree", "@degree"),
         ("Modularity Class", "@modularity_class"),
         ("Modularity Color", "$color[swatch]:modularity_color"),
@@ -85,8 +94,8 @@ def draw_the_network(G):
 
     # Create a plot — set dimensions, toolbar, and title
     plot = figure(tooltips=HOVER_TOOLTIPS,
-                  tools="pan,wheel_zoom,save,reset", active_scroll='wheel_zoom',
-                  x_range=Range1d(-10.1, 10.1), y_range=Range1d(-10.1, 10.1), title=title)
+                  tools="pan,wheel_zoom,save,reset", active_scroll='wheel_zoom', title=title)
+    plot.axis.visible = False
 
     # Create a network graph object
     # https://networkx.github.io/documentation/networkx-1.9/reference/generated/networkx.drawing.layout.spring_layout.html

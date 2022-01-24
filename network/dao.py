@@ -6,6 +6,7 @@
 # @Software: PyCharm 
 # @Comment : 数据库接口层，所有和models交互的函数需要放在这个层级中，views不直接和models交互
 from django.db.models import Q
+from django.forms.models import model_to_dict
 
 import network.models as network_models
 import pandas as pd
@@ -61,14 +62,17 @@ def get_neighbor_by_node_id(node_id):
     neighbor_edge =get_edge_by_node_id(node_id)
     for temp_edge in neighbor_edge:
         temp_node_info = get_node_by_id(temp_edge.source)
+        temp_node_info = model_to_dict(temp_node_info)
         node_list.append(temp_node_info)
         temp_node_info = get_node_by_id(temp_edge.target)
+        temp_node_info = model_to_dict(temp_node_info)
         node_list.append(temp_node_info)
     return node_list
 
 # 获取全网
 def get_all_edge():
     return network_models.BNetworkEdge.objects.filter()
+
 
 
 
