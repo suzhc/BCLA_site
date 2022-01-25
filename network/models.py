@@ -24,10 +24,10 @@ class NetworkEdge(models.Model):
 
 class BNetworkEdge(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
-    source = models.CharField(max_length=30)
-    target = models.CharField(max_length=30)
-    edge_type = models.CharField(max_length=30)
-    database = models.CharField(max_length=30)
+    source = models.IntegerField()
+    target = models.IntegerField()
+    edge_type = models.IntegerField()
+    database = models.IntegerField()
 
     class Meta:
         managed = True
