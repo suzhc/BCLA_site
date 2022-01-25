@@ -26,9 +26,9 @@
                 <h1>
                     <a href="{% url 'home_page' %}">Cancer Keeping Gene</a>
                 </h1>
-                <p>
-                    这里可以加一些注释 <a>这里是一个超链接</a>.
-                </p>
+{#                <p>#}
+{#                    这里可以加一些注释 <a>这里是一个超链接</a>.#}
+{#                </p>#}
             </div>
 
         </div>
@@ -63,11 +63,10 @@
             <!--这里是搜索框下方导航栏部分-->
             <div class="navigationbar">
                 <ul class="breadcrumb">
-                    <li class="navdes">Description</li>
-                    <li class="navnei">Neighbor Info</li>
+                    <li class="navdes"><a href="#">Description</a></li>
+                    <li class="navnei"><a href="#">Neighbor Info</a></li>
                 </ul>
             </div>
-
 
             <div class="description">
                 <!-- 这里放自我中心网图 -->
@@ -78,9 +77,9 @@
                 <!--这里放基因的详情信息-->
                 <div id="gene-description">
                     <div class="col-md-4 col-md-push-1">
-                        <h3>Description of {{ gene_info.name }}</h3>
-                        <h3>Degree :{{ gene_info.degree }}</h3>
-                        <h3>Node Type :{{ gene_info.control_type }}</h3>
+                        <h3>Gene Name: {{ gene_info.name }}</h3>
+                        <h3>Degree: {{ gene_info.degree }}</h3>
+                        <h3>Node Type: {{ gene_info.control_type }}</h3>
                     </div>
                 </div>
             </div>
