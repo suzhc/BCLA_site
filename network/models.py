@@ -75,7 +75,7 @@ class BNetworkNode(models.Model):
     is_immune_genes_core_ctl_genes = models.IntegerField()
     is_immune_genes_car_genes = models.IntegerField()
     is_immune_genes_checkpoint_genes = models.IntegerField()
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000, null=True)
 
     class Meta:
         managed = True
