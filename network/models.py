@@ -35,12 +35,19 @@ class BNetworkEdge(models.Model):
 
 
 class BNetworkNode(models.Model):
+
+    CONTROL_TYPE = (
+        (0, 'control_hub'),
+        (1, 'head'),
+        (2, 'tail'),
+        (3, 'head/tail')
+    )
     id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField(max_length=50)
     indegree = models.IntegerField(blank=True, null=True)
     outdegree = models.IntegerField(blank=True, null=True)
     degree = models.IntegerField(blank=True, null=True)
-    control_type = models.IntegerField()
+    control_type = models.IntegerField(choices=CONTROL_TYPE)
     is_sensitive = models.IntegerField()
     control_type_pnas = models.IntegerField()
     is_essential_gene = models.IntegerField()

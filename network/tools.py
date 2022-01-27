@@ -102,7 +102,8 @@ def draw_the_network(G):
     network_graph = from_networkx(G, networkx.spring_layout, scale=10, center=(0, 0))
 
     # Set node sizes and colors according to node degree (color as category from attribute)
-    network_graph.node_renderer.glyph = Circle(size=size_by_this_attribute, fill_color=color_by_this_attribute)
+    # 不设置节点大小
+    network_graph.node_renderer.glyph = Circle(size=15, fill_color=color_by_this_attribute)
     # Set node highlight colors
     network_graph.node_renderer.hover_glyph = Circle(size=size_by_this_attribute, fill_color=node_highlight_color,
                                                      line_width=2)
